@@ -2,26 +2,19 @@ import React, { useState } from 'react';
 import { Sidebar } from './components/layout/Sidebar';
 import { ChatInterface } from './components/chat/ChatInterface';
 import { InsightDashboard } from './components/insight/InsightDashboard';
-import { ProfileHeader } from './components/profile/ProfileHeader';
-import { ProfileStats } from './components/profile/ProfileStats';
-import { ProfileMenu } from './components/profile/ProfileMenu';
+import { ProfileView } from './components/profile/ProfileView';
+import { ForumView } from './components/forum/ForumView';
 
-type View = 'chat' | 'insight' | 'profile';
+type View = 'search' | 'insight' | 'profile' | 'forum';
 
 function App() {
-  const [currentView, setCurrentView] = useState<View>('insight');
+  const [currentView, setCurrentView] = useState<View>('search');
+  const [isMinimized, setIsMinimized] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
-  const mockProfile = {
-    name: 'John Doe',
-    email: 'john@example.com',
-    role: 'Developer',
-    joinDate: new Date('2024-01-01'),
-  };
-
-  const mockStats = {
-    projects: 12,
-    completedTasks: 148,
-    activeCollaborations: 5,
+  const handleLogout = () => {
+    // Implement logout logic
+    console.log('Logging out...');
   };
 
   const renderContent = () => {
@@ -29,22 +22,26 @@ function App() {
       case 'insight':
         return <InsightDashboard />;
       case 'profile':
-        return (
-          <div className="p-8">
-            <ProfileHeader profile={mockProfile} />
-            <ProfileStats stats={mockStats} />
-            <ProfileMenu />
-          </div>
-        );
+        return <ProfileView />;
+      case 'forum':
+        return <ForumView />;
       default:
         return <ChatInterface />;
     }
   };
 
   return (
-    <div className="flex h-screen bg-gray-50">
-      <Sidebar onViewChange={setCurrentView} currentView={currentView} />
-      <main className="flex-1 overflow-auto">
+    <div className={`flex h-screen ${isDarkMode ? 'dark' : ''}`}>
+      <Sidebar
+        isMinimized={isMinimized}
+        isDarkMode={isDarkMode}
+        currentView={currentView}
+        onViewChange={setCurrentView}
+        onToggleMinimize={() => setIsMinimized(!isMinimized)}
+        onToggleDarkMode={() => setIsDarkMode(!isDarkMode)}
+        onLogout={handleLogout}
+      />
+      <main className={`flex-1 overflow-auto transition-all ${isDarkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
         {renderContent()}
       </main>
     </div>
