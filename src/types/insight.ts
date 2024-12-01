@@ -1,23 +1,24 @@
-export interface InsightMetric {
-  id: string;
+export interface NewsItem {
   title: string;
-  value: number;
-  change: number;
-  trend: 'up' | 'down' | 'neutral';
+  thumbnail: string;
+  snippet: string;
+  link: string;
 }
 
-export interface ProjectInsight {
-  id: string;
-  name: string;
-  status: 'healthy' | 'warning' | 'critical';
-  metrics: InsightMetric[];
+export interface NewsResponse {
+  status: number;
+  message: string;
+  count: number;
+  data: NewsItem[];
 }
 
-export interface NewsUpdate {
-  id: string;
-  title: string;
-  date: string;
-  excerpt: string;
-  image: string;
-  commentsCount: number;
+export interface FilterOption {
+  value: string;
+  label: string;
+}
+
+export interface InsightFilters {
+  country: string;
+  degree: string;
+  major: string;
 }

@@ -23,7 +23,7 @@ export function Sidebar({
   onLogout
 }: SidebarProps) {
   return (
-    <div className={`${isMinimized ? 'w-16' : 'w-64'} bg-[#1a1f2e] h-screen flex flex-col items-center py-6 transition-all duration-300 z-30`}>
+    <div className={`${isMinimized ? 'w-16' : 'w-64'} bg-[#1a1f2e] h-screen flex flex-col items-center py-6 transition-all duration-300`}>
       <div className="mb-8">
         <Logo isMinimized={isMinimized} />
       </div>

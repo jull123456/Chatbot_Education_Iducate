@@ -1,62 +1,55 @@
 import React, { useState } from 'react';
 import { InsightFilters } from './InsightFilters';
 import { NewsCard } from './NewsCard';
-import { NewsUpdate } from '../../types/insight';
+import { LoadingSpinner } from '../common/LoadingSpinner';
+import { ErrorMessage } from '../common/ErrorMessage';
+import { useNews } from '../../hooks/useNews';
+import { countries, degrees, majors } from '../../constants/filterOptions';
 
 export function InsightDashboard() {
-  const [selectedCountry, setSelectedCountry] = useState('');
-  const [selectedDegree, setSelectedDegree] = useState('');
-  const [selectedMajor, setSelectedMajor] = useState('');
+  const [filters, setFilters] = useState({
+    country: 'Australia',
+    degree: 'Bachelor',
+    major: 'Art'
+  });
 
-  const mockUpdates: NewsUpdate[] = [
-    {
-      id: '1',
-      title: 'Peace, dignity and equality on a healthy planet',
-      date: '24 Nov 2024',
-      excerpt: 'Exploring the importance of sustainable development and global cooperation in creating a better future for all.',
-      image: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&q=80',
-      commentsCount: 156,
-    },
-    {
-      id: '2',
-      title: 'Why do we mark International Days?',
-      date: '24 Oct 2024',
-      excerpt: 'International days and weeks are occasions to educate the public on issues of concern, mobilize political will and resources.',
-      image: 'https://images.unsplash.com/photo-1569683795645-b62e50fbf103?auto=format&fit=crop&q=80',
-      commentsCount: 98,
-    },
-    {
-      id: '3',
-      title: 'How it Started?',
-      date: '24 Oct 2024',
-      excerpt: 'In 1945, representatives of 50 countries met in San Francisco to shape the future of international cooperation.',
-      image: 'https://images.unsplash.com/photo-1589262804704-c5aa9e6def89?auto=format&fit=crop&q=80',
-      commentsCount: 124,
-    },
-  ];
+  const { data: news, loading, error } = useNews(filters);
 
   return (
-    <div className="p-8 max-w-7xl mx-auto">
-      <div className="mb-12">
+    <div className="p-4 md:p-8 max-w-7xl mx-auto">
+      <div className="mb-8">
         <h1 className="text-3xl font-bold text-blue-600 mb-2">NEWS Updates</h1>
         <div className="h-0.5 w-24 bg-blue-600"></div>
-        <p className="text-gray-700 mt-4 font-medium">— {new Date().toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' })}</p>
+        <p className="text-gray-700 mt-4 font-medium">
+          — {new Date().toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' })}
+        </p>
       </div>
 
-      <InsightFilters
-        selectedCountry={selectedCountry}
-        selectedDegree={selectedDegree}
-        selectedMajor={selectedMajor}
-        onCountryChange={setSelectedCountry}
-        onDegreeChange={setSelectedDegree}
-        onMajorChange={setSelectedMajor}
-      />
-      
-      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-        {mockUpdates.map((update) => (
-          <NewsCard key={update.id} news={update} />
-        ))}
+      <div className="sticky top-0 bg-white dark:bg-gray-900 z-10 py-4 mb-8">
+        <InsightFilters
+          filters={filters}
+          onFilterChange={(key, value) => setFilters(prev => ({ ...prev, [key]: value }))}
+          options={{ countries, degrees, majors }}
+        />
       </div>
+
+      {loading && <LoadingSpinner />}
+      
+      {error && <ErrorMessage message={error} />}
+      
+      {!loading && !error && news.length === 0 && (
+        <div className="text-center py-8 text-gray-600 dark:text-gray-400">
+          No news found for the selected filters.
+        </div>
+      )}
+      
+      {!loading && !error && news.length > 0 && (
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {news.map((item, index) => (
+            <NewsCard key={`${item.title}-${index}`} news={item} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
