@@ -1,10 +1,15 @@
 export interface NewsItem {
-  id: string;
   title: string;
-  date: string;
-  excerpt: string;
-  image: string;
-  commentsCount: number;
+  thumbnail: string;
+  snippet: string;
+  link: string;
+}
+
+export interface NewsResponse {
+  status: number;
+  message: string;
+  count: number;
+  data: NewsItem[];
 }
 
 export interface FilterOption {

@@ -8,16 +8,16 @@ import { countries, degrees, majors } from '../../constants/filterOptions';
 
 export function InsightDashboard() {
   const [filters, setFilters] = useState({
-    country: countries[0].value,
-    degree: degrees[0].value,
-    major: majors[0].value
+    country: 'Australia',
+    degree: 'Bachelor',
+    major: 'Art'
   });
 
   const { data: news, loading, error } = useNews(filters);
 
   return (
     <div className="p-4 md:p-8 max-w-7xl mx-auto">
-      <div className="mb-12">
+      <div className="mb-8">
         <h1 className="text-3xl font-bold text-blue-600 mb-2">NEWS Updates</h1>
         <div className="h-0.5 w-24 bg-blue-600"></div>
         <p className="text-gray-700 mt-4 font-medium">
@@ -25,7 +25,7 @@ export function InsightDashboard() {
         </p>
       </div>
 
-      <div className="sticky top-0 bg-white z-10 py-4">
+      <div className="sticky top-0 bg-white dark:bg-gray-900 z-10 py-4 mb-8">
         <InsightFilters
           filters={filters}
           onFilterChange={(key, value) => setFilters(prev => ({ ...prev, [key]: value }))}
@@ -38,15 +38,15 @@ export function InsightDashboard() {
       {error && <ErrorMessage message={error} />}
       
       {!loading && !error && news.length === 0 && (
-        <div className="text-center py-8 text-gray-600">
+        <div className="text-center py-8 text-gray-600 dark:text-gray-400">
           No news found for the selected filters.
         </div>
       )}
       
       {!loading && !error && news.length > 0 && (
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {news.map((item) => (
-            <NewsCard key={item.id} news={item} />
+          {news.map((item, index) => (
+            <NewsCard key={`${item.title}-${index}`} news={item} />
           ))}
         </div>
       )}

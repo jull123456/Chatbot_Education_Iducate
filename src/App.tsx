@@ -13,7 +13,6 @@ function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   const handleLogout = () => {
-    // Implement logout logic
     console.log('Logging out...');
   };
 

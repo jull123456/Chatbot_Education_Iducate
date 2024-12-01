@@ -25,8 +25,7 @@ export function useInsightData(filters: InsightFilters) {
         }
       } catch (err) {
         if (mounted) {
-          setError(err instanceof Error ? err.message : 'Failed to load news');
-          setNews([]);
+          setError(err instanceof Error ? err.message : 'Failed to fetch news');
         }
       } finally {
         if (mounted) {

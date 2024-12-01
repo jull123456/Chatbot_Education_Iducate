@@ -1,5 +1,5 @@
 import { API_CONFIG } from '../config/api';
-import { InsightFilters, NewsItem } from '../types/insight';
+import { InsightFilters, NewsItem, NewsResponse } from '../types/insight';
 import { buildUrl } from '../utils/api';
 
 export async function getNews(filters: InsightFilters): Promise<NewsItem[]> {
@@ -15,17 +15,20 @@ export async function getNews(filters: InsightFilters): Promise<NewsItem[]> {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
-      },
-      mode: 'cors'
+      }
     });
 
     if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(errorText || `HTTP error! status: ${response.status}`);
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    const data = await response.json();
-    return Array.isArray(data) ? data : [];
+    const result: NewsResponse = await response.json();
+    
+    if (result.status !== 200) {
+      throw new Error(result.message || 'Failed to fetch news');
+    }
+
+    return result.data || [];
   } catch (error) {
     console.error('Error fetching news:', error);
     throw error;

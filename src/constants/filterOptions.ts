@@ -1,6 +1,6 @@
 export const countries = [
   { value: 'Germany', label: 'Germany' },
-  { value: 'UnitedStates', label: 'United States' },
+  { value: 'US', label: 'United States' },
   { value: 'Malaysia', label: 'Malaysia' },
   { value: 'Australia', label: 'Australia' },
 ];

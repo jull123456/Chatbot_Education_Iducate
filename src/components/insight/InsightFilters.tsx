@@ -17,11 +17,11 @@ interface InsightFiltersProps {
 
 export function InsightFilters({ filters, onFilterChange, options }: InsightFiltersProps) {
   return (
-    <div className="flex flex-col md:flex-row gap-4 mb-8">
+    <div className="flex flex-col md:flex-row gap-4">
       <select
         value={filters.country}
         onChange={(e) => onFilterChange('country', e.target.value)}
-        className="w-full md:w-auto px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white"
+        className="px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white dark:bg-gray-800 dark:border-gray-600 dark:text-white"
       >
         <option value="">Select Country</option>
         {options.countries.map((option) => (
@@ -34,9 +34,9 @@ export function InsightFilters({ filters, onFilterChange, options }: InsightFilt
       <select
         value={filters.degree}
         onChange={(e) => onFilterChange('degree', e.target.value)}
-        className="w-full md:w-auto px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white"
+        className="px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white dark:bg-gray-800 dark:border-gray-600 dark:text-white"
       >
-        <option value="">Select Degree</option>
+        <option value="">Select Degree Level</option>
         {options.degrees.map((option) => (
           <option key={option.value} value={option.value}>
             {option.label}
@@ -47,7 +47,7 @@ export function InsightFilters({ filters, onFilterChange, options }: InsightFilt
       <select
         value={filters.major}
         onChange={(e) => onFilterChange('major', e.target.value)}
-        className="w-full md:w-auto px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white"
+        className="px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white dark:bg-gray-800 dark:border-gray-600 dark:text-white"
       >
         <option value="">Select Major</option>
         {options.majors.map((option) => (
