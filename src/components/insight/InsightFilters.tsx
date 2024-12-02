@@ -1,13 +1,9 @@
 import React from 'react';
-import { FilterOption } from '../../types/insight';
+import { FilterOption, InsightFilters as FilterType } from '../../types/insight';
 
 interface InsightFiltersProps {
-  filters: {
-    country: string;
-    degree: string;
-    major: string;
-  };
-  onFilterChange: (key: string, value: string) => void;
+  filters: Partial<FilterType>;
+  onFilterChange: (key: keyof FilterType, value: string) => void;
   options: {
     countries: FilterOption[];
     degrees: FilterOption[];
@@ -19,11 +15,11 @@ export function InsightFilters({ filters, onFilterChange, options }: InsightFilt
   return (
     <div className="flex flex-col md:flex-row gap-4">
       <select
-        value={filters.country}
+        value={filters.country || ''}
         onChange={(e) => onFilterChange('country', e.target.value)}
         className="px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white dark:bg-gray-800 dark:border-gray-600 dark:text-white"
       >
-        <option value="">Select Country</option>
+        <option value="">All Countries</option>
         {options.countries.map((option) => (
           <option key={option.value} value={option.value}>
             {option.label}
@@ -32,11 +28,11 @@ export function InsightFilters({ filters, onFilterChange, options }: InsightFilt
       </select>
 
       <select
-        value={filters.degree}
+        value={filters.degree || ''}
         onChange={(e) => onFilterChange('degree', e.target.value)}
         className="px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white dark:bg-gray-800 dark:border-gray-600 dark:text-white"
       >
-        <option value="">Select Degree Level</option>
+        <option value="">All Degrees</option>
         {options.degrees.map((option) => (
           <option key={option.value} value={option.value}>
             {option.label}
@@ -45,11 +41,11 @@ export function InsightFilters({ filters, onFilterChange, options }: InsightFilt
       </select>
 
       <select
-        value={filters.major}
+        value={filters.major || ''}
         onChange={(e) => onFilterChange('major', e.target.value)}
         className="px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white dark:bg-gray-800 dark:border-gray-600 dark:text-white"
       >
-        <option value="">Select Major</option>
+        <option value="">All Majors</option>
         {options.majors.map((option) => (
           <option key={option.value} value={option.value}>
             {option.label}
