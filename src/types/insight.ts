@@ -22,3 +22,11 @@ export interface InsightFilters {
   degree: string;
   major: string;
 }
+
+export interface NewsUpdate{
+  image: string;
+  title: string;
+  date: string;
+  commentsCount: string;
+  excerpt: string;
+}
