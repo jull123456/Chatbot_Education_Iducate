@@ -1,6 +1,8 @@
 import React from 'react';
 import { getCognitoLoginUrl } from '../../utils/auth';
 import { Sparkles } from 'lucide-react';
+import logo from '../layout/logo-full-light-mode.png'
+import logo1 from '../layout/logo-1x1-dark-mode.png'
 
 export function Login() {
   const handleLogin = () => {
@@ -11,16 +13,19 @@ export function Login() {
     <div className="min-h-screen bg-[#1a1f2e] flex items-center justify-center text-white">
       <div className="flex-1 flex items-center justify-center">
         <div className="max-w-md w-full px-6">
-          <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-white/10 rounded-full mb-4">
-              <Sparkles className="w-8 h-8" />
+          <div className="text-center mb-0 items-center">
+           
+            {/* <span className="text-3xl font-bold mb-4">WELCOME TO</span> */}
+            <div className="flex-1 flex items-center justify-center mb-8">
+            <img src={logo1} alt="" className="h-32 w-32 items-center"/>
+            <img src={logo} alt="" className="h-20  items-center"/>
             </div>
-            <h1 className="text-3xl font-bold mb-4">Welcome to OnioNix</h1>
-            <p className="text-white/70 mb-8">
+            <p className="text-white/70 mb-4">
               Your intelligent assistant for academic and career guidance
             </p>
           </div>
 
+          
           <div className="bg-white/5 rounded-lg p-6 mb-6">
             <div className="flex items-center mb-4">
               <div className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center mr-4">
