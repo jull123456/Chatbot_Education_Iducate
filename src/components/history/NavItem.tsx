@@ -1,5 +1,5 @@
 import React from 'react';
-import { useChatStore } from './store';
+// import { useChatStore } from './store';
 
 interface NavItemProps {
   children: React.ReactNode;

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { NewsItem, InsightFilters } from '../types/insight';
-import { fetchNews, ApiError, checkSurveyStatus } from '../services/api';
+import { fetchNews, ApiError } from '../services/api';
 import { useAuthStore } from '../store/useAuthStore';
 
 interface NewsState {

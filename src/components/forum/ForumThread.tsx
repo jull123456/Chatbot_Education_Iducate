@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ArrowLeft, MessageCircle, ThumbsUp } from 'lucide-react';
 import { Post } from '../../types/forum';
 import { formatTimeAgo } from '../../utils/date';

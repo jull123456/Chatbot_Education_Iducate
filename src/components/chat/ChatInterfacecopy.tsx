@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { useChatStore, useSuggestionStore } from './store';
+import React, { useEffect} from 'react';
+import { useChatStore } from './store';
 import { assets } from "./assets/assets";
 import { ChatInputcopy } from './ChatInputcopy';
-import { getIdToken } from '../../utils/auth';
-import { getAccessToken } from '../../utils/auth';
+// import { getIdToken } from '../../utils/auth';
+// import { getAccessToken } from '../../utils/auth';
 import { ChatMessages } from './ChatMessagescopy';
-import { useAuthStore } from '../../store/useAuthStore';
+// import { useAuthStore } from '../../store/useAuthStore';
 import './main.css'
 import logo from './chatbot(1).png';
 import logo1 from './logo-full-light-mode.png'
@@ -39,20 +39,20 @@ import { getHeaders } from '../../services/api';{}
 
 export function ChatInterfacecopy() {
 //  const {surveyData} = useAuthStore();
- const { messages,chatId, setMessage, chats, setChats, setChatId, showResults, setShowResults,recentPrompt, setRecentPrompt, messagesEndRef, inputFieldRef} = useChatStore();
- const { suggestions, removeSuggestion, clearSuggestions} = useSuggestionStore();
+ const { messages,chatId, setMessage, chats, setChats, setChatId, showResults, setRecentPrompt, messagesEndRef, inputFieldRef} = useChatStore();
+//  const { removeSuggestion} = useSuggestionStore();
  const { setInput} = useChatStore();
 //  const messagesEndRef = useRef<HTMLInputElement | null>(null);
 //  const inputFieldRef = useRef<HTMLInputElement>(null);
- const [loading, setLoading] = useState(false);
+//  const [loading, setLoading] = useState(false);
 
  const handleCardClick = (promptText: string): void => {
   setInput(promptText);
 };
 
   const fetchChats = async () => {
-    const id_token = getIdToken();
-    const access_token = getAccessToken();
+    // const id_token = getIdToken();
+    // const access_token = getAccessToken();
       const response = await fetch(`https://gcdzehfy8c.execute-api.ap-southeast-1.amazonaws.com/chat-stage/chats`,{
         method: 'GET',
         headers: getHeaders(),
@@ -76,20 +76,20 @@ export function ChatInterfacecopy() {
         });
     }, []);
   
-    const handleSuggestionClick = (suggestion: string) => {
-      setInput(suggestion); // Update input value
-      removeSuggestion(suggestion); // Remove suggestion from the list
-    };
+    // const handleSuggestionClick = (suggestion: string) => {
+    //   setInput(suggestion); // Update input value
+    //   removeSuggestion(suggestion); // Remove suggestion from the list
+    // };
   
-    const newChat = () => {
-      setShowResults(false);
-      setChatId(null);
-      console.log(setChatId);
-      setMessage([]);
-      console.log(setMessage);
-      inputFieldRef?.current?.focus();
-      console.info('gagal')
-    };
+    // const newChat = () => {
+    //   setShowResults(false);
+    //   setChatId(null);
+    //   console.log(setChatId);
+    //   setMessage([]);
+    //   console.log(setMessage);
+    //   inputFieldRef?.current?.focus();
+    //   console.info('gagal')
+    // };
   
     const scrollToBottom = () => {
       setTimeout(() => {

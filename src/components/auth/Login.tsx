@@ -1,6 +1,6 @@
 import React from 'react';
 import { getCognitoLoginUrl } from '../../utils/auth';
-import { Sparkles } from 'lucide-react';
+// import { Sparkles } from 'lucide-react';
 import logo from '../layout/logo-full-light-mode.png'
 import logo1 from '../layout/logo-1x1-dark-mode.png'
 

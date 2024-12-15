@@ -1,11 +1,11 @@
 import React from 'react';
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 // Moon,
-import { Bot, Lightbulb, User, Minimize,  LogOut, MessageSquare,HandIcon, MessageCircleIcon, Activity } from 'lucide-react';
+import { Bot, Lightbulb, User, Minimize,  LogOut, MessageSquare,HandIcon, MessageCircleIcon } from 'lucide-react';
 import { SidebarButton } from './SidebarButton';
 import { Logo } from './Logo';
-import { NewChat } from '../history/newChat';
+// import { NewChat } from '../history/newChat';
 import { History } from '../history/History';
 import { useChatStore } from '../chat/store';
 
@@ -28,7 +28,6 @@ export function Sidebar({
   const navigate = useNavigate();
 
   const [isHistoryVisible, setIsHistoryVisible] = useState<boolean>(false); 
-  const [isSetNewChat, setNewChat] = useState<boolean>(false);
   const {setShowResults, setChatId, setMessage, inputFieldRef} = useChatStore();
 
   const newChat = () => {
@@ -43,10 +42,6 @@ export function Sidebar({
 
   const toggleHistory = () => {
     setIsHistoryVisible((prev) => !prev);
-  };
-
-  const toggleNewChat = () => {
-  
   };
 
 

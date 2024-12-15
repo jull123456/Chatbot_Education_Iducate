@@ -1,6 +1,6 @@
 import React  from 'react';
 import { FilterOption, InsightFilters as FilterType } from '../../types/insight';
-import { useAuthStore } from '../../store/useAuthStore';
+// import { useAuthStore } from '../../store/useAuthStore';
 
 interface InsightFiltersProps {
   filters: Partial<FilterType>;
@@ -13,7 +13,7 @@ interface InsightFiltersProps {
 }
 
 export function InsightFilters({ filters, onFilterChange, options }: InsightFiltersProps) {
-  const { surveyData } = useAuthStore();
+  // const { surveyData } = useAuthStore();
   return (
     <div  className="flex flex-col md:flex-row gap-4">
       <select

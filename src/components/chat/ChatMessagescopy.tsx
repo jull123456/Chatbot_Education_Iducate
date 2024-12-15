@@ -1,6 +1,6 @@
 import React from 'react';
-import { useChatStore } from './store';
-import { assets } from './assets/assets';
+// import { useChatStore } from './store';
+// import { assets } from './assets/assets';
 import './main.css'
 import logo1 from './profile.png';
 import logo2 from './robot-assistant.png';

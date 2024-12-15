@@ -3,7 +3,7 @@ import { Mail } from 'lucide-react';
 import { useAuthStore } from '../../store/useAuthStore';
 
 export function ProfileView() {
-  const { user, surveyData } = useAuthStore();
+  const { surveyData } = useAuthStore();
 
   return (
     <div className="max-w-4xl mx-auto p-8">

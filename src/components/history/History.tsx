@@ -1,13 +1,13 @@
-import React, { useEffect, useRef, useState} from 'react';
+import React, { useEffect} from 'react';
 import { useChatStore } from '../chat/store';
-import { NavItem, DrawerBackdrop } from './NavItem'; // import NavItem and DrawerBackdrop components
-import { getIdToken } from '../../utils/auth';
+import { NavItem } from './NavItem'; // import NavItem and DrawerBackdrop components
+// import { getIdToken } from '../../utils/auth';
 import { getHeaders } from '../../services/api';
 import logo from './chat.png'
 
 export function History() {
-  const { chats, chatId, messages, setChats, setChatId, setMessage, messagesEndRef, inputFieldRef, setShowResults} = useChatStore();
-  const [isClicked, setIsClicked] = useState(false);
+  const { chats, chatId, setChats, setChatId, setMessage, messagesEndRef, inputFieldRef, setShowResults} = useChatStore();
+  // const [isClicked, setIsClicked] = useState(false);
 
 
   useEffect(() => {
@@ -24,9 +24,9 @@ export function History() {
     fetchChats();
   }, [setChats]);
   
-  const handleClick = () => {
-    setIsClicked(!isClicked); // Membalikkan nilai state
-  };
+  // const handleClick = () => {
+  //   setIsClicked(!isClicked); // Membalikkan nilai state
+  // };
 
   const scrollToBottom = (): void => {
     setTimeout(() => {

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Post, Comment } from '../types/forum';
+import { Post} from '../types/forum';
 
 const initialPosts: Post[] = [
   {

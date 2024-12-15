@@ -1,6 +1,6 @@
-import React, { forwardRef, useEffect, useRef} from 'react';
+import React, { forwardRef} from 'react';
 import { useChatStore, useSuggestionStore } from './store';  // Import Zustand store
-import { ConeIcon, Send } from 'lucide-react';
+import { Send } from 'lucide-react';
 
 interface ChatInputProps {
   onSendMessage: (input: string) => void;
@@ -12,7 +12,7 @@ export const ChatInput = forwardRef<HTMLInputElement, ChatInputProps>(({ onSendM
   const setInput = useChatStore((state) => state.setInput);
   const resetInput = useChatStore((state) => state.resetInput);
   const {clearSuggestions} = useSuggestionStore();
-  const {setChats} = useChatStore();
+  // const {setChats} = useChatStore();
 
   
 
