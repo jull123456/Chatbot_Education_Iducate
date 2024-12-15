@@ -1,13 +1,17 @@
 import React from 'react';
-import { Home, Lightbulb, User, Minimize, Moon, LogOut, MessageSquare } from 'lucide-react';
+import { useState, useRef } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+// Moon,
+import { Bot, Lightbulb, User, Minimize,  LogOut, MessageSquare,HandIcon, MessageCircleIcon, Activity } from 'lucide-react';
 import { SidebarButton } from './SidebarButton';
 import { Logo } from './Logo';
+import { NewChat } from '../history/newChat';
+import { History } from '../history/History';
+import { useChatStore } from '../chat/store';
 
 interface SidebarProps {
   isMinimized: boolean;
   isDarkMode: boolean;
-  currentView: 'search' | 'insight' | 'profile' | 'forum';
-  onViewChange: (view: 'search' | 'insight' | 'profile' | 'forum') => void;
   onToggleMinimize: () => void;
   onToggleDarkMode: () => void;
   onLogout: () => void;
@@ -15,13 +19,38 @@ interface SidebarProps {
 
 export function Sidebar({
   isMinimized,
-  isDarkMode,
-  currentView,
-  onViewChange,
+  // isDarkMode,
   onToggleMinimize,
-  onToggleDarkMode,
+  // onToggleDarkMode,
   onLogout
 }: SidebarProps) {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const [isHistoryVisible, setIsHistoryVisible] = useState<boolean>(false); 
+  const [isSetNewChat, setNewChat] = useState<boolean>(false);
+  const {setShowResults, setChatId, setMessage, inputFieldRef} = useChatStore();
+
+  const newChat = () => {
+    setShowResults(false);
+    setChatId(null);
+    console.log(setChatId);
+    setMessage([]);
+    console.log(setMessage);
+    inputFieldRef?.current?.focus();
+    console.info('gagal')
+  };
+
+  const toggleHistory = () => {
+    setIsHistoryVisible((prev) => !prev);
+  };
+
+  const toggleNewChat = () => {
+  
+  };
+
+
+
   return (
     <div className={`${isMinimized ? 'w-16' : 'w-64'} bg-[#1a1f2e] h-screen flex flex-col items-center py-6 transition-all duration-300`}>
       <div className="mb-8">
@@ -29,33 +58,46 @@ export function Sidebar({
       </div>
 
       <nav className="flex-1 w-full px-3 space-y-2">
-        <SidebarButton
-          icon={Home}
-          label="Search"
-          isActive={currentView === 'search'}
+      <SidebarButton
+          icon={MessageCircleIcon}
+          label="New Chat"
           isMinimized={isMinimized}
-          onClick={() => onViewChange('search')}
+          onClick={newChat}
         />
+        <SidebarButton
+          icon={Bot}
+          label="Chatbot"
+          isActive={location.pathname === '/search'}
+          isMinimized={isMinimized}
+          onClick={() => navigate('/search')}
+        />
+        <SidebarButton
+          icon={HandIcon}
+          label="history"
+          isMinimized={isMinimized}
+          onClick={toggleHistory}
+        />
+        {isHistoryVisible && <History />}
         <SidebarButton
           icon={Lightbulb}
           label="Insight"
-          isActive={currentView === 'insight'}
+          isActive={location.pathname === '/insight'}
           isMinimized={isMinimized}
-          onClick={() => onViewChange('insight')}
+          onClick={() => navigate('/insight')}
         />
         <SidebarButton
           icon={MessageSquare}
           label="Forum"
-          isActive={currentView === 'forum'}
+          isActive={location.pathname === '/forum'}
           isMinimized={isMinimized}
-          onClick={() => onViewChange('forum')}
+          onClick={() => navigate('/forum')}
         />
         <SidebarButton
           icon={User}
           label="Profile"
-          isActive={currentView === 'profile'}
+          isActive={location.pathname === '/profile'}
           isMinimized={isMinimized}
-          onClick={() => onViewChange('profile')}
+          onClick={() => navigate('/profile')}
         />
       </nav>
 
@@ -66,13 +108,13 @@ export function Sidebar({
           isMinimized={isMinimized}
           onClick={onToggleMinimize}
         />
-        <SidebarButton
+        {/* <SidebarButton
           icon={Moon}
           label="Dark Mode"
           isActive={isDarkMode}
           isMinimized={isMinimized}
           onClick={onToggleDarkMode}
-        />
+        /> */}
         <SidebarButton
           icon={LogOut}
           label="Logout"

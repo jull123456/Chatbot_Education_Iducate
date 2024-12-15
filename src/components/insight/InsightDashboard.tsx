@@ -6,9 +6,15 @@ import { ErrorMessage } from '../common/ErrorMessage';
 import { useNews } from '../../hooks/useNews';
 import { countries, degrees, majors } from '../../constants/filterOptions';
 import { InsightFilters as FilterType } from '../../types/insight';
+import { useAuthStore } from '../../store/useAuthStore';
 
 export function InsightDashboard() {
-  const [filters, setFilters] = useState<Partial<FilterType>>({});
+  const { surveyData } = useAuthStore();
+  const [filters, setFilters] = useState<Partial<FilterType>>({
+    country: surveyData?.country,
+    degree: surveyData?.degree,
+    major: surveyData?.major
+  });
   const { data: news, loading, error } = useNews(filters);
 
   const handleFilterChange = (key: keyof FilterType, value: string) => {
