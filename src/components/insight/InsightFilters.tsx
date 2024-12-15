@@ -1,5 +1,6 @@
-import React from 'react';
+import React  from 'react';
 import { FilterOption, InsightFilters as FilterType } from '../../types/insight';
+import { useAuthStore } from '../../store/useAuthStore';
 
 interface InsightFiltersProps {
   filters: Partial<FilterType>;
@@ -12,14 +13,15 @@ interface InsightFiltersProps {
 }
 
 export function InsightFilters({ filters, onFilterChange, options }: InsightFiltersProps) {
+  const { surveyData } = useAuthStore();
   return (
-    <div className="flex flex-col md:flex-row gap-4">
+    <div  className="flex flex-col md:flex-row gap-4">
       <select
         value={filters.country || ''}
         onChange={(e) => onFilterChange('country', e.target.value)}
         className="px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white dark:bg-gray-800 dark:border-gray-600 dark:text-white"
       >
-        <option value="">All Countries</option>
+        <option value=''>All country</option>
         {options.countries.map((option) => (
           <option key={option.value} value={option.value}>
             {option.label}
@@ -32,7 +34,7 @@ export function InsightFilters({ filters, onFilterChange, options }: InsightFilt
         onChange={(e) => onFilterChange('degree', e.target.value)}
         className="px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white dark:bg-gray-800 dark:border-gray-600 dark:text-white"
       >
-        <option value="">All Degrees</option>
+      <option value=''>All degree</option>
         {options.degrees.map((option) => (
           <option key={option.value} value={option.value}>
             {option.label}
@@ -45,7 +47,7 @@ export function InsightFilters({ filters, onFilterChange, options }: InsightFilt
         onChange={(e) => onFilterChange('major', e.target.value)}
         className="px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none bg-white dark:bg-gray-800 dark:border-gray-600 dark:text-white"
       >
-        <option value="">All Majors</option>
+        <option value=''>All major</option>
         {options.majors.map((option) => (
           <option key={option.value} value={option.value}>
             {option.label}

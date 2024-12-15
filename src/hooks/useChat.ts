@@ -1,54 +1,45 @@
-import { useState, useEffect } from 'react';
-import { NewsItem, InsightFilters } from '../types/insight';
-import { fetchNews, ApiError } from '../services/api';
+import { useState, useCallback } from 'react';
+import { Message, ChatState } from '../types/chat';
 
-interface NewsState {
-  data: NewsItem[];
-  loading: boolean;
-  error: string | null;
-}
+export function useChat() {
+  const [state, setState] = useState<ChatState>({
+    messages: [],
+    isTyping: false,
+  });
 
-const initialState: NewsState = {
-  data: [],
-  loading: false,
-  error: null
-};
-
-export function useNews(filters: Partial<InsightFilters>) {
-  const [state, setState] = useState<NewsState>(initialState);
-
-  useEffect(() => {
-    let mounted = true;
-
-    async function loadNews() {
-      setState(prev => ({ ...prev, loading: true, error: null }));
-
-      try {
-        const data = await fetchNews(filters);
-        if (mounted) {
-          setState({ data, loading: false, error: null });
-        }
-      } catch (error) {
-        if (!mounted) return;
-
-        const errorMessage = error instanceof ApiError 
-          ? error.message 
-          : 'An unexpected error occurred. Please try again later.';
-
-        setState({
-          data: [],
-          loading: false,
-          error: errorMessage
-        });
-      }
-    }
-
-    loadNews();
-
-    return () => {
-      mounted = false;
+  const sendMessage = useCallback((content: string) => {
+    const userMessage: Message = {
+      id: Date.now().toString(),
+      content,
+      role: 'user',
+      timestamp: new Date(),
     };
-  }, [filters]);
 
-  return state;
+    setState((prev) => ({
+      ...prev,
+      messages: [...prev.messages, userMessage],
+      isTyping: true,
+    }));
+
+    // Simulate AI response
+    setTimeout(() => {
+      const assistantMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        content: `I am a simulated AI response to: "${content}"`,
+        role: 'assistant',
+        timestamp: new Date(),
+      };
+
+      setState((prev) => ({
+        messages: [...prev.messages, assistantMessage],
+        isTyping: false,
+      }));
+    }, 1000);
+  }, []);
+
+  return {
+    messages: state.messages,
+    isTyping: state.isTyping,
+    sendMessage,
+  };
 }

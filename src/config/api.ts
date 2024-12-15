@@ -1,7 +1,7 @@
 export const API_CONFIG = {
-  baseUrl: 'https://gcdzehfy8c.execute-api.ap-southeast-1.amazonaws.com/test',
+  baseURL: 'http://13.229.125.165',
   endpoints: {
-    news: '/news'
+    news: '/news',
   },
   headers: {
     'Accept': 'application/json',
