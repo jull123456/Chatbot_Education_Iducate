@@ -8,7 +8,7 @@ export const AUTH_CONFIG = {
     REGION: 'ap-southeast-1',
     CLIENT_ID: '59ltf745l5pspi4sqbot3oru7o',
     DOMAIN: 'https://ap-southeast-1qlx1wpkiu.auth.ap-southeast-1.amazoncognito.com',
-    REDIRECT_URI: 'http://localhost:3000/callback', // Changed for local development
+    REDIRECT_URI: 'https://main.d17l79epd2nsp2.amplifyapp.com/callback', // Changed for local development
     SCOPE: ['email', 'openid', 'phone', 'profile']
   }
 };
