@@ -1,5 +1,5 @@
 export const API_CONFIG = {
-  baseURL: 'http://13.229.125.165',
+  baseURL: 'https://gcdzehfy8c.execute-api.ap-southeast-1.amazonaws.com/chat-stage',
   endpoints: {
     news: '/news',
   },
