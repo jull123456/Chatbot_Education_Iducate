@@ -3,11 +3,13 @@ import { useChatStore } from '../chat/store';
 import { NavItem } from './NavItem'; // import NavItem and DrawerBackdrop components
 // import { getIdToken } from '../../utils/auth';
 import { getHeaders } from '../../services/api';
-import logo from './chat.png'
+import logo from './chat.png';
+import { useNavigate } from 'react-router-dom';
 
 export function History() {
   const { chats, chatId, setChats, setChatId, setMessage, messagesEndRef, inputFieldRef, setShowResults} = useChatStore();
   // const [isClicked, setIsClicked] = useState(false);
+  const navigate = useNavigate();
 
 
   useEffect(() => {
@@ -62,6 +64,11 @@ export function History() {
     });
   };
 
+  const handleClick = () => {
+    // Navigasi ke halaman pe`ncarian
+    navigate('/search');
+  };
+
   return (
     <div className="bg-gray-800 text-white p-4 mt-2 rounded-lg h-40 overflow-y-scroll overflow-x-scroll">
       <ul>
@@ -71,6 +78,7 @@ export function History() {
               <NavItem key={index} active={chatId === chat.id} onClick={() => openChat(chat.id)}>
                 <button 
                  className={"flex items-center text-white hover:bg-white/10"}
+                 onClick={handleClick}
 
                 //  flex items-center ${isClicked ? 'bg-blue-500 text-white' : 'bg-transparent'}
                 >
